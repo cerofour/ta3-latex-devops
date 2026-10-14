@@ -1,0 +1,195 @@
+\documentclass[a4paper, spanish]{article}
+
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2.5cm]{geometry}
+
+\usepackage[T1]{fontenc}
+
+% \usepackage[utf8]{inputenc} is no longer required (since 2018)
+
+% Spanish-specific commands
+\usepackage[spanish]{babel}
+
+% HEADER CONFIGURATION
+\usepackage{fancyhdr}
+
+\usepackage{float}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+
+% Adjust the header height to fit your logo without errors
+\setlength{\headheight}{32pt} 
+\addtolength{\topmargin}{-16pt}
+
+\pagestyle{fancy}
+\fancyhf{} % Clear default settings
+
+% Insert logo on the left (adjust height or width to scale)
+\fancyhead[L]{\includegraphics[height=18pt]{logo_utp.png}}
+
+% Add text to the right and center if needed
+\fancyhead[R]{\nouppercase{\leftmark}}
+% \fancyhead[R]{\nouppercase{\rightmark}}
+
+\fancyfoot[R]{\thepage}
+
+
+\title{Diagnóstico e Implementación de Sistemas de Información Empresarial Para la Empresa MG Solutions S.A.C}
+\author{Huanca Fernandez Kevin, Llacsahuanga Buques Diego}
+
+\begin{document}
+\begin{titlepage}
+
+    % 1. LOGO ALINEADO A LA DERECHA
+    \begin{flushright}
+        % Reemplaza 'logo_utp.png' con el nombre real de tu archivo
+        \includegraphics[height=32px]{logo_utp.png} 
+    \end{flushright}
+
+    \vspace{3cm} % Espacio entre el logo y los autores
+
+    \begin{flushleft}
+    % 2. AUTORES Y TÍTULO ALINEADOS A LA IZQUIERDA
+        {\Large \textbf{Diagnóstico e Implementación de Sistemas de Información Empresarial Para la Empresa MG Solutions S.A.C}}\\[1cm]
+        
+        {\large Huanca Fernández Kevin, Llacsahuanga Buques Diego}\\[0.8cm]
+        
+        %{\Large Enter your subtitle, comment if not applicable (\% \textbackslash subtitle)}
+    \end{flushleft}
+
+    \vfill % Esto empuja automáticamente todo el bloque siguiente hacia el final de la página
+
+    % 3. METADATOS INFERIORES ALINEADOS A LA IZQUIERDA
+    \begin{flushleft}
+        % \footnotesize % Reduce el tamaño de letra para esta sección
+        \textbf{Curso}\\
+        Sistemas de Información Empresarial (44576)\\[0.5cm]
+
+        \textbf{Docente}\\
+        Nicho Gomez, Miluska\\[0.5cm]
+
+        Sábado 18 de Julio, 2026
+    \end{flushleft}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\input{c1-description}
+
+\input{c2-diagnostic}
+
+\input{c3-core-process}
+
+\input{c4-arquitectura}
+
+\input{c5-data-management}
+
+\input{c6-security}
+
+\input{c7-risk-management}
+
+\input{c8-innovation}
+
+\input{c9-digital-transformation}
+
+\end{document}\documentclass[a4paper, spanish]{article}
+
+\usepackage[top=2cm, bottom=2cm, left=3cm, right=2.5cm]{geometry}
+
+\usepackage[T1]{fontenc}
+
+% \usepackage[utf8]{inputenc} is no longer required (since 2018)
+
+% Spanish-specific commands
+\usepackage[spanish]{babel}
+
+% HEADER CONFIGURATION
+\usepackage{fancyhdr}
+
+\usepackage{float}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{graphicx}
+\graphicspath{ {img/} }
+
+% Adjust the header height to fit your logo without errors
+\setlength{\headheight}{32pt} 
+\addtolength{\topmargin}{-16pt}
+
+\pagestyle{fancy}
+\fancyhf{} % Clear default settings
+
+% Insert logo on the left (adjust height or width to scale)
+\fancyhead[L]{\includegraphics[height=18pt]{logo_utp.png}}
+
+% Add text to the right and center if needed
+\fancyhead[R]{\nouppercase{\leftmark}}
+% \fancyhead[R]{\nouppercase{\rightmark}}
+
+\fancyfoot[R]{\thepage}
+
+
+\title{Diagnóstico e Implementación de Sistemas de Información Empresarial Para la Empresa MG Solutions S.A.C}
+\author{Huanca Fernandez Kevin, Llacsahuanga Buques Diego}
+
+\begin{document}
+\begin{titlepage}
+
+    % 1. LOGO ALINEADO A LA DERECHA
+    \begin{flushright}
+        % Reemplaza 'logo_utp.png' con el nombre real de tu archivo
+        \includegraphics[height=32px]{logo_utp.png} 
+    \end{flushright}
+
+    \vspace{3cm} % Espacio entre el logo y los autores
+
+    \begin{flushleft}
+    % 2. AUTORES Y TÍTULO ALINEADOS A LA IZQUIERDA
+        {\Large \textbf{Diagnóstico e Implementación de Sistemas de Información Empresarial Para la Empresa MG Solutions S.A.C}}\\[1cm]
+        
+        {\large Huanca Fernández Kevin, Llacsahuanga Buques Diego}\\[0.8cm]
+        
+        %{\Large Enter your subtitle, comment if not applicable (\% \textbackslash subtitle)}
+    \end{flushleft}
+
+    \vfill % Esto empuja automáticamente todo el bloque siguiente hacia el final de la página
+
+    % 3. METADATOS INFERIORES ALINEADOS A LA IZQUIERDA
+    \begin{flushleft}
+        % \footnotesize % Reduce el tamaño de letra para esta sección
+        \textbf{Curso}\\
+        Sistemas de Información Empresarial (44576)\\[0.5cm]
+
+        \textbf{Docente}\\
+        Nicho Gomez, Miluska\\[0.5cm]
+
+        Sábado 18 de Julio, 2026
+    \end{flushleft}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\input{c1-description}
+
+\input{c2-diagnostic}
+
+\input{c3-core-process}
+
+\input{c4-arquitectura}
+
+\input{c5-data-management}
+
+\input{c6-security}
+
+\input{c7-risk-management}
+
+\input{c8-innovation}
+
+\input{c9-digital-transformation}
+
+\end{document}
