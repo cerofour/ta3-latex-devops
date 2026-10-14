@@ -1,0 +1,95 @@
+name: ta3-iot
+
+services:
+  emqx:
+    image: emqx/emqx:5.8.6
+    container_name: ta3-emqx
+    restart: unless-stopped
+    ports:
+      # MQTT para los ESP32
+      - "1883:1883"
+      # Dashboard de EMQX
+      - "18083:18083"
+    environment:
+      # Autenticacion obligatoria por usuario/clave
+      EMQX_AUTHENTICATION__1__MECHANISM: password_based
+      EMQX_AUTHENTICATION__1__BACKEND: built_in_database
+      EMQX_AUTHENTICATION__1__USER_ID_TYPE: username
+      EMQX_DASHBOARD__DEFAULT_PASSWORD: ${EMQX_DASHBOARD_PASSWORD}
+    volumes:
+      - emqx_data:/opt/emqx/data
+      - emqx_log:/opt/emqx/log
+    networks:
+      - iot_net
+
+  influxdb:
+    image: influxdb:2
+    container_name: ta3-influxdb
+    restart: unless-stopped
+    ports:
+      - "8086:8086"
+    environment:
+      DOCKER_INFLUXDB_INIT_MODE: setup
+      DOCKER_INFLUXDB_INIT_USERNAME: ${INFLUXDB_USERNAME}
+      DOCKER_INFLUXDB_INIT_PASSWORD: ${INFLUXDB_PASSWORD}
+      DOCKER_INFLUXDB_INIT_ORG: ${INFLUXDB_ORG}
+      DOCKER_INFLUXDB_INIT_BUCKET: ${INFLUXDB_BUCKET}
+      DOCKER_INFLUXDB_INIT_ADMIN_TOKEN: ${INFLUXDB_TOKEN}
+    volumes:
+      - influxdb_data:/var/lib/influxdb2
+      - influxdb_config:/etc/influxdb2
+    networks:
+      - iot_net
+
+  nodered:
+    build:
+      context: ./nodered
+    container_name: ta3-nodered
+    restart: unless-stopped
+    depends_on:
+      - emqx
+      - influxdb
+    ports:
+      - "1880:1880"
+    environment:
+      TZ: America/Lima
+      INFLUXDB_URL: http://influxdb:8086
+      INFLUXDB_ORG: ${INFLUXDB_ORG}
+      INFLUXDB_BUCKET: ${INFLUXDB_BUCKET}
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
+      NODE_RED_CREDENTIAL_SECRET: ${NODERED_CREDENTIAL_SECRET}
+    volumes:
+      - nodered_data:/data
+    networks:
+      - iot_net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ta3-grafana
+    restart: unless-stopped
+    depends_on:
+      - influxdb
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      TZ: America/Lima
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - iot_net
+
+networks:
+  iot_net:
+    name: ta3-iot-net
+    driver: bridge
+
+volumes:
+  emqx_data:
+  emqx_log:
+  influxdb_data:
+  influxdb_config:
+  nodered_data:
+  grafana_data:
