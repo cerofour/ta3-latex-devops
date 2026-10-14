@@ -133,10 +133,29 @@
 
   \lstinputlisting[language=C]{src/esp32-to-cloud.ino}
 
-  \section{Configuración del Broker MQTT}
+```latex
+\section{Configuración del Broker MQTT}
 
-  \section{Publicación de Datos vía MQTT}
+Para gestionar la comunicación entre el nodo IoT y los servicios de almacenamiento, se configuró EMQX 5.8.6 mediante Docker Compose. Se habilitaron los puertos 1883 para la comunicación MQTT y 18083 para acceder al panel de administración. Asimismo, se configuró la autenticación mediante usuario y contraseña para controlar el acceso al broker.
 
-  \section{Almacenamiento y Visualización}
+La arquitectura se complementó con InfluxDB para almacenar las mediciones, Node-RED para procesar los mensajes MQTT y Grafana para visualizar los datos. Todos los servicios se conectaron mediante una red Docker compartida.
+
+\section{Publicación de Datos vía MQTT}
+
+El ESP32 se programó mediante Arduino IDE utilizando las bibliotecas \texttt{WiFi.h} y \texttt{PubSubClient.h}. El dispositivo se conecta a la red Wi-Fi y establece una conexión autenticada con el broker EMQX mediante su dirección IP y el puerto 1883.
+
+El sensor ultrasónico HC-SR04 mide la distancia de los objetos utilizando el tiempo de retorno de la señal sonora. Las mediciones se realizan cada dos segundos y se publican en el tópico \texttt{ta3/distancia} mediante mensajes JSON con el siguiente formato:
+
+\begin{lstlisting}
+{"distancia_cm": 25.43}
+\end{lstlisting}
+
+La transmisión se verifica mediante el monitor serial del Arduino IDE y un cliente MQTT suscrito al tópico correspondiente, comprobando la recepción continua de los mensajes publicados.
+
+\section{Almacenamiento y Visualización}
+
+Para almacenar las mediciones, se utilizó InfluxDB 2 como base de datos de series temporales. Node-RED recibe los mensajes publicados en el tópico MQTT, extrae el valor de distancia y registra las mediciones en el bucket configurado de InfluxDB, utilizando las credenciales definidas en las variables de entorno de Docker Compose.
+
+Finalmente, se configuró Grafana para consultar los datos almacenados en InfluxDB y representarlos mediante un dashboard. El panel permite visualizar la evolución de la distancia medida a lo largo del tiempo, facilitando el seguimiento de las mediciones y su actualización conforme se reciben nuevos registros.
 
 \end{document}
