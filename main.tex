@@ -107,10 +107,14 @@
   \section{Implementación del Nodo IoT}
   
   Para la implementación del nodo IoT se utilizó un microcontrolador
-  ESP32-WROOM-32 que se utilizará para recibir mediciones desde
-  un sensor HC-SR04 y serán enviadas a instancia en la nube.
+  ESP32 que se utilizará para recibir mediciones desde
+    la nube y un sensor ultrasónico para medir la próximidad
+    de objetos. A continuación se detalla la lista de materiales
+    utilizadas para la elaboración.
 
-    
+    \begin{table}
+      \item \textbf{ESP32 WROOM-32}
+    \end{table}
 
   \lstinputlisting[language=C]{src/esp32-to-cloud.ino}
 
